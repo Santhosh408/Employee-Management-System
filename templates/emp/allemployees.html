@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+<nav id="navbar" class="navbar">
+  <ul>
+    <li><a class="nav-link scrollto" href="/">Home</a></li>
+    <li><a class="nav-link scrollto" href="#about">About</a></li>
+    <li><a class="nav-link scrollto" href="#services">Services</a></li>
+    <li><a class="nav-link scrollto active" href="/allemployees">All Employees</a></li>
+    <li><a class="nav-link scrollto" href="/addemployee">Add Employee</a></li>
+    
+    <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
+    {% if not request.user.is_authenticated %}
+    <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+    {% else %}
+    <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+    {% endif %}
+    
+  </ul>
+  <i class="bi bi-list mobile-nav-toggle"></i>
+</nav><!-- .navbar -->
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+  <div style="margin-top:100px ;" class="row">
+    {% for message in messages %}
+        <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+            {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+        </div>
+    {% endfor %}
+      <h1 style="text-align: center;margin-bottom:30px">Employee Details</h1>
+      <table class="table caption-top">
+        <thead>
+          <tr>
+            <th style="text-align: center;" scope="col">E.No</th>
+            <!-- <th style="text-align: center;" scope="col">DB Id</th> -->
+            <th style="text-align: center;" scope="col">Employee Id</th>
+            <th style="text-align: center;" scope="col">Name</th>
+            <th style="text-align: center;" scope="col">Email</th>
+            <th style="text-align: center;" scope="col">Mobile</th>
+            <th style="text-align: center;" scope="col">Role</th>
+            <th style="text-align: center;" scope="col">Salary</th>
+            <th style="text-align: center;" scope="col">Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if allemployees %}
+          {% for eachemployee in allemployees %}
+          <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <!-- <th>{{eachemployee.id}}</th> -->
+            <td>{{eachemployee.employeeid}}</td>
+            <td>{{eachemployee.employeename}}</td>
+            <td>{{eachemployee.employeeemail}}</td>
+            <td>{{eachemployee.employeephonenumber}}</td>
+            <td>{{eachemployee.employeerole}}</td>
+            <td>{{eachemployee.employeesalary}}</td>
+            <td>{{eachemployee.employeeaddress}}</td>
+            <td><a href="{% url 'updateemployee' eachemployee.id %}" class="btn btn-sm btn-outline-success">Update</a></td>
+            <td><a href="{% url 'deleteemployee' eachemployee.id %}" class="btn btn-sm btn-outline-danger">Delete</a></td>
+          </tr>
+          {% endfor %}
+          {% endif %}
+
+        </tbody>
+      </table>
+    
+  </div>
+</div>
+
+
+{% endblock %}

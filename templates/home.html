@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+<nav id="navbar" class="navbar">
+  <ul>
+    <li><a class="nav-link scrollto active" href="/">Home</a></li>
+    <li><a class="nav-link scrollto" href="/about">About</a></li>
+    <li><a class="nav-link scrollto" href="/services">Services</a></li>
+    <li><a class="nav-link scrollto " href="/allemployees">All Employees</a></li>
+    <li><a class="nav-link scrollto" href="/addemployee">Add Employee</a></li>
+    
+    <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
+    {% if not request.user.is_authenticated %}
+    <li><a class="getstarted scrollto" href="/signup">Get Started</a></li>
+    {% else %}
+    <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+    {% endif %}
+    
+  </ul>
+  <i class="bi bi-list mobile-nav-toggle"></i>
+</nav><!-- .navbar -->
+{% endblock %}
+
+{% block body %}
+
+     <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 pt-2 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
+            {% for message in messages %}
+                <div class="alert alert-{{message.tags}} alert-dismissable fade show" role="alert">
+                    {{message}}
+                    <button style="margin-left: 330px;" type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+          <h1 style="color: blue;"><strong>Employee Management<br>System</strong></h1>
+          <ul>
+            <li><i class="ri-check-line"></i> create,read</li>
+            <li><i class="ri-check-line"></i> Update,delete</li>
+            <li><i class="ri-check-line"></i> employee details</li>
+          </ul>
+          <div class="mt-3">
+            {% if not request.user.is_authenticated %}
+            <a href="/signup" class="btn-get-started scrollto">Sign Up</a>
+            <a href="/login" class="btn-get-quote">Login Now</a>
+            {% else %}
+            <a href="/" class="btn-get-started scrollto">WELCOME</a>
+            {% endif %}
+            
+          </div>
+        </div>
+        <div class="col-lg-6 order-1 order-lg-2 hero-img">
+          <img src="static/assets/img/hero-img.png" class="img-fluid" alt="">
+        </div>
+      </div>
+    </div>
+
+  </section><!-- End Hero -->
+{% endblock %}

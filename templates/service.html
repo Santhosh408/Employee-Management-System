@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+<nav id="navbar" class="navbar">
+  <ul>
+    <li><a class="nav-link scrollto" href="/">Home</a></li>
+    <li><a class="nav-link scrollto" href="/about">About</a></li>
+    <li><a class="nav-link scrollto active" href="/services">Services</a></li>
+    <li><a class="nav-link scrollto" href="/allemployees">All Employees</a></li>
+    <li><a class="nav-link scrollto" href="/addemployee">Add Employee</a></li>
+    
+    <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
+    {% if not request.user.is_authenticated %}
+    <li><a class="getstarted scrollto" href="/about">Get Started</a></li>
+    {% else %}
+    <li><a class="getstarted scrollto" href="/logout">Logout</a></li>
+    {% endif %}
+    
+  </ul>
+  <i class="bi bi-list mobile-nav-toggle"></i>
+</nav><!-- .navbar -->
+{% endblock %}
+
+{% block body %}
+
+  <!-- ======= Why Us Section ======= -->
+  <section style="margin-top: 100px;" id="why-us" class="why-us">
+    <div class="container">
+
+      <div class="row">
+
+        <div class="col-lg-6">
+          <div class="box">
+            <span>01</span>
+            <h4>CREATE</h4>
+            <p>Ulamco laboris nisi ut aliquip ex ea commodo consequat. Et consectetur ducimus vero placeat</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mt-4 mt-lg-0">
+          <div class="box">
+            <span>02</span>
+            <h4>READ</h4>
+            <p>Dolorem est fugiat occaecati voluptate velit esse. Dicta veritatis dolor quod et vel dire leno para dest</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mt-4 mt-lg-0">
+          <div style="margin-top: 50px;" class="box">
+            <span>03</span>
+            <h4>UPDATE</h4>
+            <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
+          </div>
+        </div>
+
+        <div class="col-lg-6 mt-4 mt-lg-0">
+            <div style="margin-top: 50px;" class="box">
+              <span>04</span>
+              <h4>DELETE</h4>
+              <p>Molestiae officiis omnis illo asperiores. Aut doloribus vitae sunt debitis quo vel nam quis</p>
+            </div>
+          </div>
+
+      </div>
+
+    </div>
+  </section><!-- End Why Us Section -->
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block link %}
+    <link rel="stylesheet" href="static/assets/css/login.css">
+{% endblock %}
+
+{% block navbar %}
+<nav id="navbar" class="navbar">
+    <ul>
+      <li><a class="nav-link scrollto" href="/">Home</a></li>
+      <li><a class="nav-link scrollto" href="#about">About</a></li>
+      <li><a class="nav-link scrollto" href="/services">Services</a></li>
+      <li><a class="nav-link scrollto " href="/allemployees">All Employees</a></li>
+      <li><a class="nav-link scrollto" href="/addemployee">Add Employee</a></li>
+      
+      <li><a class="nav-link scrollto" href="/contact">Contact</a></li>
+      <li><a class="getstarted scrollto" href="/login">Login</a></li>
+    </ul>
+    <i class="bi bi-list mobile-nav-toggle"></i>
+  </nav><!-- .navbar -->
+{% endblock %}
+
+{% block body %}
+<div class="main">
+
+    <!-- Sign up form -->
+    <section style="margin-top: 20px; margin-bottom:-50px" class="signup">
+        <div  class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    {% for message in messages %}
+                    <div class="alert alert-{{message.tags}} alert-dismissable fade show" role="alert">
+                        {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+                    <h2 class="form-title">Sign up</h2>
+                    <form action="/signup" method="POST" class="register-form" id="register-form">{% csrf_token %}
+                        <div class="form-group">
+                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="text" name="name" id="name" placeholder="Your Name" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                            <input type="email" name="email" id="email" placeholder="Your Email" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" name="pass1" id="pass" placeholder="Password" required/>
+                        </div>
+                        <div class="form-group">
+                            <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <input type="password" name="pass2" id="re_pass" placeholder="Repeat your password" required/>
+                        </div>
+                        
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register" required/>
+                        </div>
+                    </form>
+                </div>
+                <div class="signup-image">
+                    <figure><img src="static/assets/images/signup-image.jpg" alt="sing up image"></figure>
+                    <a href="/login" class="signup-image-link"> <strong>I'm Already Member</strong> </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- <script src="static/assets/vendor/jquery/jquery.min.js"></script> -->
+{% endblock %}
